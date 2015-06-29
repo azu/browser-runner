@@ -1,0 +1,43 @@
+{
+  "name": "browser-runner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azu/browser-runner.git"
+  },
+  "author": "azu",
+  "email": "azuciao@gmail.com",
+  "homepage": "https://github.com/azu/browser-runner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azu/browser-runner/issues"
+  },
+  "version": "1.0.0",
+  "description": "Run browser via WebDriver API.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "selenium",
+    "browser",
+    "console",
+    "tools",
+    "webdriver",
+    "phantomjs"
+  ],
+  "dependencies": {
+    "debug": "^2.2.0",
+    "deepmerge": "^0.2.10",
+    "node-static": "^0.7.6",
+    "selenium-webdriver": "^2.46.1"
+  },
+  "devDependencies": {
+    "babel": "^5.6.14",
+    "espower-babel": "^3.2.0",
+    "mocha": "^2.2.5",
+    "power-assert": "^0.11.0"
+  }
+}

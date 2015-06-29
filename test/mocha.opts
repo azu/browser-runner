@@ -1,0 +1,2 @@
+--compilers js:espower-babel/guess
+--timeout 10000
