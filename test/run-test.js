@@ -5,7 +5,7 @@ import path from "path"
 it("BrowserRunner", function () {
     var browserRunner = new BrowserRunner({
         rootDir: process.cwd(),
-        browser: "firefox"
+        browser: "phantomjs"
     });
     console.log(process.cwd() + "/test/index.html");
     return browserRunner.runBrowser(process.cwd() + "/test/index.html");

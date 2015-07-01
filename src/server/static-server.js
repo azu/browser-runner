@@ -13,14 +13,15 @@ module.exports = function (emitter, options) {
     var server = require('http').createServer(function (request, response) {
         request.addListener('end', function () {
             fileServer.serve(request, response, function (err, result) {
-                debug("serving " + request.url + " - " + err.message);
                 if (err) { // There was an error serving the file
                     debug("Error serving " + request.url + " - " + err.message);
 
                     // Respond to the client
                     response.writeHead(err.status, err.headers);
                     response.end();
+                    return;
                 }
+                debug("serving " + request.url);
             });
         }).resume();
     }).listen(options.server.port);

@@ -2,7 +2,7 @@
 "use strict";
 import webdriver from "selenium-webdriver"
 /**
- * Browser class is interface of browser like phantomjs, chrome, firefox, IE...
+ * Browser class is the interface of browser like phantomjs, chrome, firefox, IE...
  */
 export default class Browser {
     constructor(browserOptions) {
@@ -13,11 +13,7 @@ export default class Browser {
     }
 
     goToURL(URL) {
-        return new Promise((resolve)=>{
-            setTimeout(()=> {
-                this.driver.get(URL).then(resolve)
-            },100);
-        })
+        return this.driver.get(URL);
     }
 
     /**

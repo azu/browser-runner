@@ -21,9 +21,11 @@ export default class BrowserRunner {
             return result;
         };
         var URL = resolveTargetPath(filePath, this.options);
-        var browser = new Browser(this.options);
         return this._setupServer()
             .then(()=> {
+                // 非同期でやるとWebDriverが終了してしまう。
+                // そのため同期的に呼び出されなければならない
+                var browser = new Browser(this.options);
                 return browser.goToURL(URL)
             })
             .then(close, close);
