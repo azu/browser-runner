@@ -26,11 +26,13 @@ export default class BrowserRunner {
                 // 非同期でやるとWebDriverが終了してしまう。
                 // そのため同期的に呼び出されなければならない
                 var browser = new Browser(this.options);
-                if (customAction) {
+
+                if (typeof customAction === "function") {
                     return browser.goToURL(URL).then(()=> {
                         return customAction(browser.driver, this.options);
                     })
                 }
+                console.log(URL);
                 return browser.goToURL(URL);
             })
             .then(close, close);

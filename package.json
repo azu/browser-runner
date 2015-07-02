@@ -18,7 +18,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "build": "babel src --out-dir lib --source-maps --loose es6.classes",
+    "watch": "babel src --out-dir lib --watch --source-maps --loose es6.classes",
+    "test": "npm run build && mocha"
   },
   "keywords": [
     "selenium",
@@ -32,6 +34,7 @@
     "debug": "^2.2.0",
     "deepmerge": "^0.2.10",
     "node-static": "^0.7.6",
+    "optionator": "^0.6.0",
     "selenium-webdriver": "^2.46.1"
   },
   "devDependencies": {

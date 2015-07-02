@@ -9,6 +9,10 @@ export default class Browser {
         var runningCapabilities = {
             browserName: browserOptions.browser
         };
+        webdriver.promise.controlFlow().on('uncaughtException', function(e) {
+            console.error('Unhandled error: ' + e);
+        });
+
         this.driver = this._openDriver(runningCapabilities);
     }
 

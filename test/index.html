@@ -7,7 +7,9 @@
 <body>
 <button id="click">buttooov</button>
 <script>
+    console.log("LOAD!");
     document.getElementById("click").addEventListener("click", function () {
+        console.log("CLICK!");
         document.title = "test-finish";
         document.documentElement.className = "test-finish";
     });
