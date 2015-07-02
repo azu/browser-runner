@@ -5,8 +5,12 @@
     <title></title>
 </head>
 <body>
+<button id="click">buttooov</button>
 <script>
-    throw new Error("aaaa");
+    document.getElementById("click").addEventListener("click", function () {
+        document.title = "test-finish";
+        document.documentElement.className = "test-finish";
+    });
 </script>
 </body>
 </html>

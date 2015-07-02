@@ -12,7 +12,7 @@ export default class BrowserRunner {
         this.serverEmitter.setMaxListeners(100);
     }
 
-    runBrowser(filePath) {
+    runBrowser(filePath, customAction) {
         var close = (result)=> {
             this._closeServer();
             if (result instanceof Error) {
@@ -26,7 +26,12 @@ export default class BrowserRunner {
                 // 非同期でやるとWebDriverが終了してしまう。
                 // そのため同期的に呼び出されなければならない
                 var browser = new Browser(this.options);
-                return browser.goToURL(URL)
+                if (customAction) {
+                    return browser.goToURL(URL).then(()=> {
+                        return customAction(browser.driver, this.options);
+                    })
+                }
+                return browser.goToURL(URL);
             })
             .then(close, close);
     }
