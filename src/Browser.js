@@ -34,8 +34,11 @@ export default class Browser {
             .build();
     }
 
-    closeDriver(driver) {
-        driver.quit();
+    closeDriver() {
+        if(!this.driver) {
+            return;
+        }
+        this.driver.quit();
     }
 
     outputLogs() {

@@ -43,7 +43,7 @@ export default class BrowserRunner {
         var browser = new Browser(this.options);
         var close = (result)=> {
             return browser.outputLogs()
-                .then(browser.quit)
+                .then(browser.closeDriver.bind(browser))
                 .then(function () {
                     if (result instanceof Error) {
                         return Promise.reject(result);

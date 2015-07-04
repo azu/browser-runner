@@ -21,7 +21,6 @@ describe("BrowserRunner", function () {
             assert.equal(URL, "/test/index.html");
         });
         return browserRunner.runBrowser(process.cwd() + "/test/index.html");
-
     });
     it("run with custom action", function () {
         var testEmitter = new EventEmitter();
