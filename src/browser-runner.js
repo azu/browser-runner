@@ -5,6 +5,9 @@ import deepmerge from "deepmerge"
 import {resolveTargetPath} from "./utils/option-utils"
 import Browser from "./Browser"
 import defaultOptions from "./options/default-options"
+function identity(...args) {
+    return args
+}
 export default class BrowserRunner {
     constructor(options) {
         this.options = deepmerge(defaultOptions, options);
@@ -22,22 +25,36 @@ export default class BrowserRunner {
         };
         var URL = resolveTargetPath(filePath, this.options);
         return this._setupServer()
-            .then(()=> {
-                // 非同期でやるとWebDriverが終了してしまう。
-                // そのため同期的に呼び出されなければならない
-                var browser = new Browser(this.options);
-
-                if (typeof customAction === "function") {
-                    return browser.goToURL(URL).then(()=> {
-                        return customAction(browser.driver, this.options);
-                    })
-                }
-                console.log(URL);
-                return browser.goToURL(URL);
-            })
+            .then(this._launchBrowser.bind(this, URL, customAction))
             .then(close, close);
     }
 
+
+    /**
+     * Launch browser and access URL
+     * @param URL
+     * @param customAction
+     * @returns {Promise}
+     * @private
+     */
+    _launchBrowser(URL, customAction = identity) {
+        // 非同期でやるとWebDriverが終了してしまう。
+        // そのため同期的に呼び出されなければならない
+        var browser = new Browser(this.options);
+        var close = (result)=> {
+            return browser.outputLogs()
+                .then(browser.quit)
+                .then(function () {
+                    if (result instanceof Error) {
+                        return Promise.reject(result);
+                    }
+                    return result;
+                });
+        };
+        return browser.goToURL(URL).then(()=> {
+            return customAction(browser.driver, this.options);
+        }).then(close, close);
+    }
 
     _setupServer() {
         if (!this.options.server || !this.options.server.script) {

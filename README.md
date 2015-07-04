@@ -28,7 +28,7 @@ $ browser-runner -b firefox path/to/index.html
 
 ## Tests
 
-- [ ] Write How to Tests
+    npm test
 
 ## Contributing
 

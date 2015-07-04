@@ -7,13 +7,14 @@ import webdriver from "selenium-webdriver"
 export default class Browser {
     constructor(browserOptions) {
         var runningCapabilities = {
-            browserName: browserOptions.browser
+            browserName: browserOptions.browser,
+            loggingPrefs: {'browser': 'ALL'}
         };
-        webdriver.promise.controlFlow().on('uncaughtException', function(e) {
+        webdriver.promise.controlFlow().on('uncaughtException', function (e) {
             console.error('Unhandled error: ' + e);
         });
 
-        this.driver = this._openDriver(runningCapabilities);
+        this.driver = this.openDriver(runningCapabilities);
     }
 
     goToURL(URL) {
@@ -27,14 +28,26 @@ export default class Browser {
      * @returns {!webdriver.WebDriver}
      * @private
      */
-    _openDriver(capabilities) {
+    openDriver(capabilities) {
         return new webdriver.Builder()
             .withCapabilities(capabilities)
+            .setLoggingPrefs({'browser': 'ALL'})
             .build();
     }
 
-    _closeDriver(driver) {
+    closeDriver(driver) {
         driver.quit();
+    }
+
+    outputLogs() {
+        return this.driver.manage().logs().get('browser').then(function (browserLog) {
+            var filteredLog = browserLog.filter(function (logEntry) {
+                return logEntry.level.value > webdriver.logging.Level.ALL.value;
+            });
+            if (filteredLog.length) {
+                console.log('browser console errors: ' + require('util').inspect(browserLog));
+            }
+        });
     }
 
 }
