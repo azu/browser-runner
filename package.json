@@ -12,15 +12,19 @@
     "url": "https://github.com/azu/browser-runner/issues"
   },
   "version": "1.0.0",
-  "description": "Run browser via WebDriver API.",
-  "main": "index.js",
+  "description": "Run browsers via WebDriver API.",
+  "main": "lib/browser-runner.js",
+  "files": [
+    "bin",
+    "lib"
+  ],
   "directories": {
     "test": "test"
   },
   "scripts": {
     "build": "babel src --out-dir lib --source-maps --loose es6.classes",
     "watch": "babel src --out-dir lib --watch --source-maps --loose es6.classes",
-    "test": "npm run build && mocha"
+    "test": "npm run build && mocha && cd example && npm run example"
   },
   "keywords": [
     "selenium",

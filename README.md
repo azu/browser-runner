@@ -1,6 +1,6 @@
 # browser-runner [![Build Status](https://travis-ci.org/azu/browser-runner.svg?branch=master)](https://travis-ci.org/azu/browser-runner)
 
-Lunch Browser from Node.js/CommandLine via [selenium-webdriver](https://www.npmjs.com/package/selenium-webdriver "selenium-webdriver").
+Lunch Browser from Node.js/Command line via [selenium-webdriver](https://www.npmjs.com/package/selenium-webdriver "selenium-webdriver").
 
 ## Installation
 
@@ -23,8 +23,23 @@ Launch browser and access to local html.
 $ browser-runner -b firefox path/to/index.html
 ```
 
+#### Help
+
+```
+$ browser-runner -h
+browser-runner [options]
+
+Options:
+  -h, --help            Show help
+  -v, --version         Outputs the version number
+  -b, --browser String  Specify Browser - default: phantomjs
+```
+
 
 ### Node.js modules
+
+```js
+```
 
 ## Tests
 

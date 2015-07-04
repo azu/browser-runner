@@ -15,6 +15,12 @@ export default class BrowserRunner {
         this.serverEmitter.setMaxListeners(100);
     }
 
+    /**
+     * launch browser and access the path.
+     * @param {string} filePath filePath or URL
+     * @param customAction customAction(webdriver, options)
+     * @returns {Promise}
+     */
     runBrowser(filePath, customAction) {
         var close = (result)=> {
             this._closeServer();
