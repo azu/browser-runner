@@ -47,7 +47,7 @@ export default class Browser {
                 return logEntry.level.value > webdriver.logging.Level.ALL.value;
             });
             if (filteredLog.length) {
-                console.log('browser console errors: ' + require('util').inspect(browserLog));
+                console.log('Browser logs: ' + require('util').inspect(browserLog));
             }
         });
     }

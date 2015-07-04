@@ -5,8 +5,8 @@ import deepmerge from "deepmerge"
 import {resolveTargetPath} from "./utils/option-utils"
 import Browser from "./Browser"
 import defaultOptions from "./options/default-options"
-function identity(...args) {
-    return args
+function identity() {
+    return;
 }
 export default class BrowserRunner {
     constructor(options) {
