@@ -24,7 +24,7 @@
   "scripts": {
     "build": "babel src --out-dir lib --source-maps --loose es6.classes",
     "watch": "babel src --out-dir lib --watch --source-maps --loose es6.classes",
-    "test": "npm run build && mocha && cd example && npm run example"
+    "test": "npm run build && mocha && (cd example && npm run example)"
   },
   "keywords": [
     "selenium",

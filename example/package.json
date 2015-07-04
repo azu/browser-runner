@@ -1,0 +1,17 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "example": "npm install && node local-example.js"
+  },
+  "keywords": [
+    "example"
+  ],
+  "author": "azu",
+  "license": "MIT",
+  "dependencies": {
+    "browser-runner": "file:.."
+  }
+}
