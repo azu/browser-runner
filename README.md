@@ -35,6 +35,7 @@ Options:
   -b, --browser String  Specify Browser - default: phantomjs
 ```
 
+Supported `-b` value list: [http://selenium.googlecode.com/git/docs/api/javascript/enum_webdriver_Browser.html](http://selenium.googlecode.com/git/docs/api/javascript/enum_webdriver_Browser.html "Browser")
 
 ### Node.js modules
 
