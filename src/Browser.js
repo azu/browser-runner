@@ -31,7 +31,6 @@ export default class Browser {
     openDriver(capabilities) {
         return new webdriver.Builder()
             .withCapabilities(capabilities)
-            .setLoggingPrefs({'browser': 'ALL'})
             .build();
     }
 

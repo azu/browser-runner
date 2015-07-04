@@ -2,7 +2,12 @@
 "use strict";
 import assert from "assert";
 import path from "path";
+import isURL from "is-url";
+
 export function resolveTargetPath(targetPath, option) {
+    if (isURL(targetPath)) {
+        return targetPath;
+    }
     var root = option.rootDir;
     // target is file path
     if (typeof option.server === "undefined") {

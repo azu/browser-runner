@@ -30,6 +30,11 @@ $ browser-runner -b firefox path/to/index.html
 
     npm test
 
+## TODO
+
+- [ ] Firefox doesn't ouput `console.log`
+    - [firefox - Selenium - how to turn on firebug with console, script and net - Stack Overflow](http://stackoverflow.com/questions/4681072/selenium-how-to-turn-on-firebug-with-console-script-and-net "firefox - Selenium - how to turn on firebug with console, script and net - Stack Overflow")
+
 ## Contributing
 
 1. Fork it!
