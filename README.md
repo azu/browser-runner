@@ -1,4 +1,4 @@
-# browser-runner
+# browser-runner [![Build Status](https://travis-ci.org/azu/browser-runner.svg?branch=master)](https://travis-ci.org/azu/browser-runner)
 
 Lunch Browser from Node.js/CommandLine via [selenium-webdriver](https://www.npmjs.com/package/selenium-webdriver "selenium-webdriver").
 
