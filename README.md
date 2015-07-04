@@ -38,7 +38,29 @@ Options:
 
 ### Node.js modules
 
+Access URL example: [example/example.js](example/example.js)
+
 ```js
+var BrowserRunner = require("browser-runner");
+var runner = new BrowserRunner({
+    "browser": "phantomjs"
+});
+runner.runBrowser("http://example.com").then(function () {
+    console.log("FINISH EXAMPLE!");
+}).catch(console.error.bind(console));
+```
+
+Access local file example: [example/local-example.js](example/local-example.js)
+
+```js
+var BrowserRunner = require("browser-runner");
+var path = require("path");
+var runner = new BrowserRunner({
+    "browser": "phantomjs"
+});
+runner.runBrowser(path.join(__dirname, "local.html")).then(function () {
+    console.log("FINISH LOCAL EXAMPLE!");
+}).catch(console.error.bind(console));
 ```
 
 ## Tests
