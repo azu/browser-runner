@@ -64,6 +64,19 @@ runner.runBrowser(path.join(__dirname, "local.html")).then(function () {
 }).catch(console.error.bind(console));
 ```
 
+[default-options.js](https://github.com/azu/browser-runner/blob/e350a481f013dcda0d605575c89e50d6d990bd11/src/options/default-options.js "default-options.js"):
+
+```js
+var defaultOptions = {
+    "rootDir": process.cwd(),
+    "browser": "phantomjs",
+    "server": {
+        "script": require("../server/static-server"),
+        "port": 8991
+    }
+};
+```
+
 ## Tests
 
     npm test
