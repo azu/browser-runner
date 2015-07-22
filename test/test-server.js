@@ -3,12 +3,10 @@
 var staticServer = require('node-static');
 var assert = require("assert");
 var debug = require("debug")("browser-runner:server");
+var EventEmitter = require("events").EventEmitter;
 module.exports = function (testEmitter) {
-    /**
-     * @param {EventEmitter} emitter
-     * @param {object} options
-     */
-    return function (emitter, options) {
+    return function (options) {
+        var emitter = new EventEmitter();
         var fileServer = new staticServer.Server(options.rootDir);
         var server = require('http').createServer(function (request, response) {
             request.addListener('end', function () {
@@ -25,12 +23,15 @@ module.exports = function (testEmitter) {
                     debug("serving " + request.url);
                 });
             }).resume();
+            // finish setup callback
+            emitter.emit("connection");
         }).listen(options.server.port);
         // when reftest-runner emit "close", then sever should be closed.
         emitter.on("close", function () {
             server.close()
         });
-        // finish setup callback
-        emitter.emit("connection");
+        return {
+            emitter: emitter
+        }
     }
 };

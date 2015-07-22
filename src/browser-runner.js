@@ -11,8 +11,7 @@ function identity() {
 export default class BrowserRunner {
     constructor(options) {
         this.options = deepmerge(defaultOptions, options);
-        this.serverEmitter = new EventEmitter();
-        this.serverEmitter.setMaxListeners(100);
+        this.serverEmitter = null;
     }
 
     /**
@@ -69,21 +68,23 @@ export default class BrowserRunner {
         if (typeof this.options.server.script !== "function") {
             throw new Error("options.server.script should be function.");
         }
-        return new Promise((resolve, reject)=> {
-            this.serverEmitter.once("connection", ()=> {
-                this.serverEmitter.removeAllListeners("error");
+        return new Promise((resolve, reject) => {
+            var severImplement = this.options.server.script;
+            var {emitter} = severImplement(this.options);
+            this.serverEmitter = emitter;
+            emitter.once("connection", ()=> {
+                emitter.removeAllListeners("error");
                 resolve();
             });
-            this.serverEmitter.once("error", (error)=> {
+            emitter.once("error", (error)=> {
                 reject(error);
             });
-            var severImplement = this.options.server.script;
-            severImplement(this.serverEmitter, this.options);
-            assert(this.serverEmitter.listeners("close").length > 0, `${severImplement.name} should implement emitter.on("close", function({ ... })`);
+            assert(emitter.listeners("close").length > 0, `${severImplement.name} should implement emitter.on("close", function({ ... })`);
         });
     }
 
     _closeServer() {
+        console.log(this.serverEmitter);
         this.serverEmitter.emit("close");
         this.serverEmitter.removeAllListeners();
     }

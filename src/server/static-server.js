@@ -2,13 +2,14 @@
 "use strict";
 var staticServer = require('node-static');
 var assert = require("assert");
+import {EventEmitter} from "events"
 var debug = require("debug")("browser-runner:server");
 /**
- * @param {EventEmitter} emitter
  * @param {object} options
  */
-module.exports = function (emitter, options) {
+module.exports = function (options) {
     assert(options && options.server && options.server.port != null, "must set options.server.port");
+    var emitter = new EventEmitter();
     var fileServer = new staticServer.Server(options.rootDir);
     var server = require('http').createServer(function (request, response) {
         request.addListener('end', function () {
@@ -24,11 +25,14 @@ module.exports = function (emitter, options) {
                 debug("serving " + request.url);
             });
         }).resume();
+        // finish setup callback
+        emitter.emit("connection");
     }).listen(options.server.port);
     // when reftest-runner emit "close", then sever should be closed.
     emitter.on("close", function () {
         server.close()
     });
-    // finish setup callback
-    emitter.emit("connection");
+    return {
+        emitter
+    }
 };
