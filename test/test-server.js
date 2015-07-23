@@ -23,10 +23,10 @@ module.exports = function (testEmitter) {
                     debug("serving " + request.url);
                 });
             }).resume();
+        }).listen(options.server.port, function(){
             // finish setup callback
             emitter.emit("connection");
-        }).listen(options.server.port);
-        // when reftest-runner emit "close", then sever should be closed.
+        });
         emitter.on("close", function () {
             server.close()
         });

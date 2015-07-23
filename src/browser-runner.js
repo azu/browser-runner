@@ -1,5 +1,6 @@
 // LICENSE : MIT
 "use strict";
+import assert from "assert"
 import {EventEmitter} from "events"
 import deepmerge from "deepmerge"
 import {resolveTargetPath} from "./utils/option-utils"
@@ -80,11 +81,10 @@ export default class BrowserRunner {
                 reject(error);
             });
             assert(emitter.listeners("close").length > 0, `${severImplement.name} should implement emitter.on("close", function({ ... })`);
-        });
+        }).catch(error => console.error(error.stack));
     }
 
     _closeServer() {
-        console.log(this.serverEmitter);
         this.serverEmitter.emit("close");
         this.serverEmitter.removeAllListeners();
     }
